@@ -457,7 +457,7 @@ public class SignInTest {
         mail.sendKeys(excel().getCellData("gmail",17));
 
         WebElement nextBtn = signInPage.nextBTN;
-        nextBtn.click   ();
+        nextBtn.click();
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebElement password = signInPage.passInput;

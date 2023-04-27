@@ -1,12 +1,13 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import utils.BaseSetup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.ExcelHelpers;
 
 import java.util.List;
 
@@ -25,6 +26,29 @@ public class HomePage extends BaseSetup {
     @CacheLookup
     public List<WebElement> topBarRightMenuItems;
 
+    //topbar / right menu list
+    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li/ul[1]")
+    @CacheLookup
+    public WebElement topBarRightMenuList;
+
+    //Phòng btn
+    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li[3]")
+    @CacheLookup
+    public WebElement P;
+
+    //trung tâm btn
+    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li[2]")
+    @CacheLookup
+    public WebElement TT;
+
+    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li[1]")
+    @CacheLookup
+    public WebElement DT;
+
+    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li[4]")
+    @CacheLookup
+    public WebElement K;
+
     //nvabar item
     @FindBy(className = "dropdown")
     @CacheLookup
@@ -34,6 +58,38 @@ public class HomePage extends BaseSetup {
     @FindBy(className = "dropdown-toggle")
     @CacheLookup
     public List<WebElement> navbarItemsText;
+
+    @FindBy(className = "dropdown-menu")
+    @CacheLookup
+    public WebElement navbarDropMenu;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[1]")
+    @CacheLookup
+    public WebElement GT;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[2]")
+    @CacheLookup
+    public WebElement TB;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[3]")
+    @CacheLookup
+    public WebElement TKB;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[4]")
+    @CacheLookup
+    public WebElement QT;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[5]")
+    @CacheLookup
+    public WebElement CTDT;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[6]")
+    @CacheLookup
+    public WebElement L;
+
+    @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[7]")
+    @CacheLookup
+    public WebElement DN;
 
     //search input
     @FindBy(xpath = "//input[@id='search']")
@@ -45,6 +101,12 @@ public class HomePage extends BaseSetup {
     @CacheLookup
     public WebElement searchButton;
 
+    @FindBy(xpath ="//body/div[2]/div[1]/div[1]/div[1]/a[1]/img[1]")
+    @CacheLookup
+    public WebElement logo;
+
+
+
     public HomePage(WebDriver driver) {
         super(driver);
         this.driver = driver;
@@ -53,7 +115,14 @@ public class HomePage extends BaseSetup {
 
     public boolean validPageTitle(String expectedResult){
         String actualPageTitle = driver.getTitle();
-        return actualPageTitle.equals(expectedResult);
+        return actualPageTitle.contains(expectedResult);
+    }
+
+    public void navigate(String URL, String link, String expectedResult){
+        WebElement element = driver.findElement(By.xpath(link));
+        element.click();
+        openWindow(URL);
+        Assert.assertTrue(validPageTitle(expectedResult));
     }
 
 

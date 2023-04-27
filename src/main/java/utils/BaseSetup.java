@@ -8,7 +8,7 @@ import org.testng.annotations.Parameters;
 
 public class BaseSetup {
 
-    protected WebDriver driver;
+    protected static WebDriver driver;
 
     public BaseSetup(WebDriver driver) {
         this.driver = driver;
@@ -44,6 +44,9 @@ public class BaseSetup {
 
     public void BaseSetup() {
         // TODO Auto-generated method stub
+    }
 
+    public static WebDriver getDriver() {
+        return driver;
     }
 }
