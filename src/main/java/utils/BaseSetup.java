@@ -26,7 +26,6 @@ public class BaseSetup {
     }
 
     @Parameters({"url"})
-    @BeforeClass
     public void openWindow(String url) {
         try {
             driver.get(url);
@@ -36,7 +35,7 @@ public class BaseSetup {
         }
     }
 
-    @AfterTest
+
     public void closeBrowser() throws InterruptedException {
         Thread.sleep(2000);
         driver.quit();
@@ -46,7 +45,4 @@ public class BaseSetup {
         // TODO Auto-generated method stub
     }
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
 }

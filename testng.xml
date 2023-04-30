@@ -1,52 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="D:/Selenium/VKU">
+    <test name="HP_Test">
         <classes>
-            <class name="tests.HomePageTest">
-                <methods>
-                    <include name="case1"/>
-                    <include name="case2"/>
-                    <include name="case3"/>
-                    <include name="case4"/>
-                    <include name="case5"/>
-                    <include name="case7"/>
-                    <include name="case8"/>
-                    <include name="case9"/>
-                    <include name="case10"/>
-                    <include name="case12"/>
-                    <include name="case13"/>
-                </methods>
-            </class>
-            <class name="tests.SignInTest">
-                <methods>
-                    <include name="testSignIn_case1"/>
-                    <include name="testSignIn_case2"/>
-                    <include name="testSignIn_case3"/>
-                    <include name="testSignIn_case4"/>
-                    <include name="testSignIn_case5"/>
-                    <include name="testSignIn_case6"/>
-                    <include name="testSignIn_case7"/>
-                    <include name="testSignIn_case8"/>
-                    <include name="testSignIn_case9"/>
-                    <include name="testSignIn_case10"/>
-                    <include name="testSignIn_case11"/>
-                    <include name="testSignIn_case12"/>
-                    <include name="testSignIn_case13"/>
-                    <include name="testSignIn_case14"/>
-                    <include name="testSignIn_case15"/>
-                    <include name="testSignIn_case16"/>
-                    <include name="testSignIn_case17"/>
-                    <include name="testSignIn_case18"/>
-                    <include name="testSignIn_case19"/>
-                    <include name="testSignIn_case20"/>
-                </methods>
-            </class>
-            <class name="tests.test">
-                <methods>
-                    <include name="signInPage"/>
-                </methods>
-            </class>
+            <class name="tests.HomePageTest"/>
         </classes>
     </test>
+<!--    <test name="SignIn_Test">-->
+<!--        <classes>-->
+<!--            <class name="tests.SignInTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

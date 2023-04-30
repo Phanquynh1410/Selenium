@@ -37,42 +37,42 @@ public class SignInTest {
         Assert.assertTrue(homePage.validPageTitle(expectedPageTitle));
     }
 
-//    @AfterTest
-//    public void teardown(){
-//        driver.close();
-//    }
+    @AfterTest
+    public void teardown(){
+        driver.close();
+    }
 
-    @Test (priority = 1)
+    @Test
     public void testSignIn_case1() throws InterruptedException {
         openHomePage();
 
         List<WebElement> navBarItems = homePage.navbarItems;
 
         for (WebElement navBarItem : navBarItems) {
-            if(navBarItem.getText().equals("Đăng nhập")){
+            if (navBarItem.getText().equals("Đăng nhập")) {
                 //CLick into ĐĂNG NHẬP
                 navBarItem.click();
                 Thread.sleep(500);
 
-            List<WebElement> navBarSubmenu = driver.findElements(By.xpath("//body[1]/nav[1]/div[1]/div[2]/ul[1]/li[7]/ul[1]/li[1]"));
+                List<WebElement> navBarSubmenu = driver.findElements(By.xpath("//body[1]/nav[1]/div[1]/div[2]/ul[1]/li[7]/ul[1]/li[1]"));
 
-            for (WebElement navBarSubmenuItem : navBarSubmenu) {
-                //Click into SINH VIÊN
-                if(navBarSubmenuItem.getText().equals("Sinh viên")){
-                    navBarSubmenuItem.click();
+                for (WebElement navBarSubmenuItem : navBarSubmenu) {
+                    //Click into SINH VIÊN
+                    if (navBarSubmenuItem.getText().equals("Sinh viên")) {
+                        navBarSubmenuItem.click();
 
-                    //check navigate true page
-                    Assert.assertTrue(signInPage.validPageTitle("TRƯỜNG ĐẠI HỌC CNTT & TT VIỆT - HÀN"));
+                        //check navigate true page
+                        Assert.assertTrue(signInPage.validPageTitle("TRƯỜNG ĐẠI HỌC CNTT & TT VIỆT - HÀN"));
 
-                    //click SignIn button
-                    WebElement signInBtn = signInPage.SignInBtn.findElement(By.tagName("a"));
+                        //click SignIn button
+                        WebElement signInBtn = signInPage.SignInBtn.findElement(By.tagName("a"));
 //                    WebElement signInBtn = driver.findElement(By.xpath("//body/div[@id='row']/div[2]/div[1]/div[1]/center[1]/button[1]/a[1]"));
-                    signInBtn.click();
+                        signInBtn.click();
 
-                    //check navigate true page
-                    Assert.assertTrue(signInPage.validPageTitle("Đăng nhập - Tài khoản Google"));
+                        //check navigate true page
+                        Assert.assertTrue(signInPage.validPageTitle("Đăng nhập - Tài khoản Google"));
+                    }
                 }
-            }
             }
         }
     }

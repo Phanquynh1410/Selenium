@@ -20,6 +20,7 @@ public class ExcelHelpers {
     private Color mycolor;
     private String excelFilePath;
     private Map<String, Integer> columns = new HashMap<>();
+    private Map<String, Integer> rows = new HashMap<>();
 
     public void setExcelFile(String ExcelPath, String SheetName) throws Exception {
         try {
@@ -44,6 +45,11 @@ public class ExcelHelpers {
             sh.getRow(0).forEach(cell ->{
                 columns.put(cell.getStringCellValue(), cell.getColumnIndex());
             });
+            //adding all the column header names to the map 'rows'
+            sh.forEach(row ->{
+                rows.put(row.getCell(0).getStringCellValue(), row.getRowNum());
+            });
+
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -84,6 +90,10 @@ public class ExcelHelpers {
     //Gọi ra hàm này nè
     public String getCellData(String columnName, int rownum) throws Exception {
         return getCellData(rownum, columns.get(columnName));
+    }
+
+    public String getCellData(String columnName, String rowName) throws Exception {
+        return getCellData(rows.get(rowName), columns.get(columnName));
     }
 
     public void setCellData(String text, int rownum, int colnum) throws Exception {

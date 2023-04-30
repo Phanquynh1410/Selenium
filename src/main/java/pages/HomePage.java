@@ -1,15 +1,17 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import utils.BaseSetup;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
 
 
 public class HomePage extends BaseSetup {
@@ -27,11 +29,11 @@ public class HomePage extends BaseSetup {
     public List<WebElement> topBarRightMenuItems;
 
     //topbar / right menu list
-    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li/ul[1]")
+    @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul/li")
     @CacheLookup
-    public WebElement topBarRightMenuList;
+    public List<WebElement> topBarRightMenuSubList;
 
-    //Phòng btn
+    //Right menu Items btn
     @FindBy(xpath = "//body[1]/div[1]/div[1]/div[3]/ul[1]/li[3]")
     @CacheLookup
     public WebElement P;
@@ -63,6 +65,8 @@ public class HomePage extends BaseSetup {
     @CacheLookup
     public WebElement navbarDropMenu;
 
+
+    //navbar items btn
     @FindBy(xpath = "//body/nav[@id='top-navigator']/div[1]/div[2]/ul[1]/li[1]")
     @CacheLookup
     public WebElement GT;
@@ -105,7 +109,9 @@ public class HomePage extends BaseSetup {
     @CacheLookup
     public WebElement logo;
 
-
+    @FindBy(xpath = "//body/div[2]/div[1]/div[1]/div[2]/div[1]/a[1]")
+    @CacheLookup
+    public WebElement translateImg;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -118,11 +124,22 @@ public class HomePage extends BaseSetup {
         return actualPageTitle.contains(expectedResult);
     }
 
-    public void navigate(String URL, String link, String expectedResult){
+    public void navigate(String link, String expectedResult) {
+        // Find the button element and click it to open tab 2
         WebElement element = driver.findElement(By.xpath(link));
-        element.click();
-        openWindow(URL);
-        Assert.assertTrue(validPageTitle(expectedResult));
+        Actions action = new Actions(driver);
+        action.keyDown(Keys.CONTROL).moveToElement(element).click().perform();
+
+        // Wait for tab 2 to open and switch to it
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+
+        String actualTitle = driver.getTitle();
+
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+
+        Assert.assertTrue(actualTitle.contains(expectedResult));
     }
 
 
